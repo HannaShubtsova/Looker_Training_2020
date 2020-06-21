@@ -7,7 +7,7 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 # # Select the views that should be a part of this model,
 # # and define the joins that connect them together.
 
- explore: order_items {
+ explore: order_items{
   join: users {
     type: left_outer
     sql_on: ${order_items.user_id} = ${users.id} ;;
@@ -25,9 +25,9 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
     relationship: many_to_one
   }
 
-  join: distribution_centers {
-    type: left_outer
-    sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
-    relationship: many_to_one
-  }
+#  join: distribution_centers {
+#    type: left_outer
+#    sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
+#    relationship: many_to_one
+#  }
 }
