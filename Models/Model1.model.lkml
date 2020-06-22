@@ -8,3 +8,4 @@ include: "/Models/*.view.lkml"                # include all views in the views/ 
 # # and define the joins that connect them together.
 
  explore: model1_view1 {}
+explore: products { label: "Test product"}
