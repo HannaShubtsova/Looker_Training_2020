@@ -11,15 +11,15 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 # # and define the joins that connect them together.
 
  explore: inventory_items {
-  label: "Product and distribution centers"
+  label: "Products and distribution centers"
   join: products {
-    type: left_outer
+    type: inner
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
     relationship: many_to_one
   }
 
   join: distribution_centers {
-    type: left_outer
+    type: inner
     sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
     relationship: many_to_one
   }
