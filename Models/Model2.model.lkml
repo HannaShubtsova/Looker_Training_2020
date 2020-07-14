@@ -46,7 +46,7 @@ explore:  order_items_turnover {
     view_label:"shipped to info"
     type: left_outer
     sql_on: ${order_items_turnover.user_id} = ${users.id};;
-#    fields: [users.state,users.city,users.zip,users.latitude,users.longitude]
+    fields: [users.state,users.city,users.zip,users.latitude,users.longitude]
     relationship: many_to_one
  }
 
