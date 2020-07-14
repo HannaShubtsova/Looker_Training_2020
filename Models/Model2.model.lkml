@@ -11,31 +11,6 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 # # and define the joins that connect them together.
 
 
-explore:  order_items{
-  label: "Returns analysis aggregated"
-  #fields: []
-  sql_always_where: ${order_items.status} =  Returned ;;
-  join: users {
-    type: left_outer
-    sql_on: ${order_items.user_id} = ${users.id} ;;
-    relationship: many_to_one
-    fields: [users.country, users.state, users.city, users.age ]
-  }
-
-  join: inventory_items {
-    type: inner
-    sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
-    relationship: many_to_one
-  }
-
-  join: products {
-    type: left_outer
-    sql_on: ${inventory_items.product_id} = ${products.id} ;;
-    relationship: many_to_one
-  }
-
-
-}
 
 explore: products {
   label: "Products returned vs shipped"
