@@ -39,7 +39,7 @@ explore:  order_items{
 
 explore: products {
   label: "Products returned vs shipped"
-
+  view_name: products
   join: inventory_items_returns {
   from: inventory_items
   type:  inner
