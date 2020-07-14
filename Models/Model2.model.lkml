@@ -49,9 +49,22 @@ explore:  order_items_turnover {
     fields: [users.state,users.city,users.zip,users.latitude,users.longitude]
     relationship: many_to_one
  }
+}
 
+# Place in `Model2` model
 
+explore: +order_items_turnover {
+  aggregate_table: rollup__distribution_centers_name {
+    query: {
+      dimensions: [distribution_centers.name]
+      filters: [order_items_turnover.shipped_year: "1 years"]
+      timezone: "America/Los_Angeles"
+    }
 
+    materialization: {
+      persist_for: "24 hours"
+    }
+  }
 }
 
 explore: fact_orders {}
