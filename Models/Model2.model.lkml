@@ -40,16 +40,17 @@ explore:  order_items{
 explore: products {
   label: "Products returned vs shipped"
   view_name: products
+  fields: [category,brand,name]
   join: inventory_items_returns {
-  from: inventory_items
-  type:  inner
-  sql_on: ${inventory_items_returns.product_id} = ${products.id} ;;
-  relationship: one_to_many
+    from: inventory_items
+    type:  inner
+    sql_on: ${inventory_items_returns.product_id} = ${products.id} ;;
+    relationship: one_to_many
 
 
   }
   join: inventory_items_sold  {
-  from: inventory_items
+    from: inventory_items
     type:  inner
     sql_on: ${ inventory_items_sold.product_id} = ${products.id} ;;
     relationship: one_to_many
