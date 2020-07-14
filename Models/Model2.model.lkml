@@ -14,7 +14,7 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 
 explore: products {
   label: "Products returned vs shipped"
-  view_name: products
+
   fields: [category,brand,name]
   join: inventory_items_returns {
     from: inventory_items
