@@ -21,8 +21,34 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 #}
 
 explore:  order_items_turnover {
-  label: "Shipment turnover analysis  "
+  label: "Shipment turnover analysis"
+  fields: [order_id, status,turnover_created_delivered_days,count,sale_price,delivered_year,delivered_month,created_year,created_month]
 
+
+  join: inventory_items {
+      #Left Join only brings in items that have been sold as order_item
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${inventory_items.id} = ${order_items_turnover.inventory_item_id} ;;
+      fields: [inventory_items.product_name,inventory_items.product_brand,inventory_items.product_category]
+
+    }
+
+  join: distribution_centers {
+    view_label: "Shipped from info"
+    type: left_outer
+    sql_on: ${distribution_centers.id} = ${inventory_items.product_distribution_center_id} ;;
+    relationship: many_to_one
+    fields: [distribution_centers.name, distribution_centers.longitude,distribution_centers.latitude]
+  }
+
+ join: users {
+    view_label:"shipped to info"
+    type: left_outer
+    sql_on: ${order_items_turnover.user_id} = ${users.id};;
+    fields: [users.state,users.city,users.zip,users.latitude,users.longitude]
+    relationship: many_to_one
+ }
 
 
 
