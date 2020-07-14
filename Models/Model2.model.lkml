@@ -41,5 +41,5 @@ explore:  order_items{
     relationship: many_to_one
   }
 
-
 }
+explore:  order_items_turnover {}
