@@ -26,6 +26,7 @@ explore:  order_items{
     type: left_outer
     sql_on: ${order_items.user_id} = ${users.id} ;;
     relationship: many_to_one
+    fields: [users.country,users.state, users.city, users.gender, users.age]
   }
 
   join: inventory_items {
