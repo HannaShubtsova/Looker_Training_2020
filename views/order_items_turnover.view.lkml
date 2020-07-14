@@ -1,5 +1,5 @@
 include: "order_items.view"
-view: order_items_turnover {
+view: orders {
   extends: [order_items]
 
 
@@ -7,4 +7,6 @@ view: order_items_turnover {
     type: number
     sql: DATEDIFF(day,${TABLE}."CREATED_AT"::timestamp ), ${TABLE}."DELIVERED_AT"::timestamp ) ;;
   }
+
+
 }
