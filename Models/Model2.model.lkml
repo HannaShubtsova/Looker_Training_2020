@@ -39,14 +39,14 @@ explore:  order_items_turnover {
     type: left_outer
     sql_on: ${distribution_center_location.id} = ${inventory_items.product_distribution_center_id} ;;
     relationship: many_to_one
-    fields: [distribution_center_location.name, distribution_center_location.location]
+    fields: [distribution_center_location.name, distribution_center_location.location,distribution_center_location.latitude,distribution_center_location.longitude]
   }
 
  join: users_location {
     view_label:"Shipped to info"
     type: left_outer
     sql_on: ${order_items_turnover.user_id} = ${users_location.id};;
-    fields: [users_location.state,users_location.city,users_location.zip,users_location.location]
+    fields: [users_location.state,users_location.city,users_location.zip,users_location.location, users_location.latitude,users_location.longitude]
     relationship: many_to_one
  }
 }
