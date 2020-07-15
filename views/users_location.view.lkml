@@ -4,8 +4,8 @@ include: "users.view"
     dimension: location {
       label: "Destination location "
       type: location
-      sql_latitude: users.latitude ;;
-      sql_longitude: users.longitude ;;
+      sql_latitude: ${TABLE}.latitude ;;
+      sql_longitude: ${TABLE}.longitude ;;
     }
 
 

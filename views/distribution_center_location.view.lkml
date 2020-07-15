@@ -4,8 +4,8 @@ view: distribution_center_location {
   dimension: location {
     label: "Distribution center location "
     type: location
-    sql_latitude: distribution_centers.latitude ;;
-    sql_longitude: distribution_centers.longitude ;;
+    sql_latitude: ${TABLE}.latitude ;;
+    sql_longitude: ${TABLE}.longitude ;;
   }
 
 
