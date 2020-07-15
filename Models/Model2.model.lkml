@@ -34,37 +34,25 @@ explore:  order_items_turnover {
 
     }
 
-  join: distribution_centers {
+  join: distribution_center_location {
     view_label: "Shipped from info"
     type: left_outer
-    sql_on: ${distribution_centers.id} = ${inventory_items.product_distribution_center_id} ;;
+    sql_on: ${distribution_center_location.id} = ${inventory_items.product_distribution_center_id} ;;
     relationship: many_to_one
-    fields: [distribution_centers.name, distribution_centers.longitude,distribution_centers.latitude]
+    fields: [distribution_center_location.name, distribution_center_location.location]
   }
 
- join: users {
+ join: users_location {
     view_label:"Shipped to info"
     type: left_outer
-    sql_on: ${order_items_turnover.user_id} = ${users.id};;
-    fields: [users.state,users.city,users.zip,users.latitude,users.longitude]
+    sql_on: ${order_items_turnover.user_id} = ${users_location.id};;
+    fields: [users_location.state,users_location.city,users_location.zip,users_location.location]
     relationship: many_to_one
  }
 }
 
-# Place in `Model2` model
 
-explore: +order_items_turnover {
-  aggregate_table: rollup__distribution_centers_name {
-    query: {
-      dimensions: [distribution_centers.name]
-      filters: [order_items_turnover.shipped_year: "1 years"]
-      timezone: "America/Los_Angeles"
-    }
 
-    materialization: {
-      persist_for: "24 hours"
-    }
-  }
-}
+
 
 explore: fact_orders {}
