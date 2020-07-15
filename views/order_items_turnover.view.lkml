@@ -21,8 +21,8 @@ view: order_items_turnover {
     sql: DATEDIFF(day,${TABLE}."CREATED_AT"::timestamp , ${TABLE}."DELIVERED_AT"::timestamp ) ;;
   }
 
-#measure: items_in_order{
-#  type:  count
-
-#}
+measure: items_in_order{
+  type: average
+  sql: count(${TABLE}.ID) ;;
+}
 }
