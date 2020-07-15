@@ -10,15 +10,19 @@ view: order_items_turnover {
 
  measure: Average_Turnover{
    type: average
-   sql: DATEDIFF(day,${TABLE}."CREATED_AT"::timestamp , ${TABLE}."RETURNED_AT"::timestamp ) ;;
+   sql: DATEDIFF(day,${TABLE}."CREATED_AT"::timestamp , ${TABLE}."DELIVERED_AT"::timestamp ) ;;
  }
   measure: Median_Turnover{
     type: median
-    sql: DATEDIFF(day,${TABLE}."CREATED_AT"::timestamp , ${TABLE}."RETURNED_AT"::timestamp ) ;;
+    sql: DATEDIFF(day,${TABLE}."CREATED_AT"::timestamp , ${TABLE}."DELIVERED_AT"::timestamp ) ;;
  }
  measure: Max_Turnover{
     type: max
-    sql: DATEDIFF(day,${TABLE}."CREATED_AT"::timestamp , ${TABLE}."RETURNED_AT"::timestamp ) ;;
+    sql: DATEDIFF(day,${TABLE}."CREATED_AT"::timestamp , ${TABLE}."DELIVERED_AT"::timestamp ) ;;
+  }
 
-}
+#measure: items_in_order{
+#  type:  count
+
+#}
 }
