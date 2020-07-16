@@ -90,6 +90,7 @@ view: fact_orders {
     label: "All orders"
     type: count
     #sql:  ${TABLE}."ID";;
+    drill_fields: [products.brand, products.name]
   }
 
   measure: Completed {
@@ -100,6 +101,7 @@ view: fact_orders {
       field: status
       value: "Complete"
     }
+    drill_fields: [products.brand, products.name]
   }
   measure: Cancellations {
     label: "Cancellations"
@@ -109,6 +111,7 @@ view: fact_orders {
       field: status
       value: "Cancelled"
       }
+    drill_fields: [products.brand, products.name]
   }
   measure: Returns {
       label: "Returns"
@@ -118,5 +121,6 @@ view: fact_orders {
         field: status
         value: "Returned"
       }
+     drill_fields: [products.brand, products.name]
   }
   }
