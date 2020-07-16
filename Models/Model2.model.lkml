@@ -55,4 +55,7 @@ explore:  order_items_turnover {
 
 
 
-explore: fact_orders {}
+explore: fact_orders {
+  view_label: "Delivered VS Retured"
+
+}
