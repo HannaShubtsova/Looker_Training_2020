@@ -56,6 +56,15 @@ explore:  order_items_turnover {
 
 
 explore: fact_orders {
+  label: "Delivered VS Retured"
   view_label: "Delivered VS Retured"
+
+join: products {
+  view_label: "Products"
+  type: left_outer
+  sql_on: ${fact_orders.product_id} = ${products.id};;
+  relationship: one_to_many
+
+}
 
 }
