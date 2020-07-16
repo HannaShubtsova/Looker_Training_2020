@@ -86,6 +86,12 @@ view: fact_orders {
     sql: ${TABLE}."SALE_PRICE" ;;
 
   }
+  measure: count {
+    label: "All orders"
+    type: count
+    #sql:  ${TABLE}."ID";;
+  }
+
   measure: Completed {
     label: "Completed"
     type: count
