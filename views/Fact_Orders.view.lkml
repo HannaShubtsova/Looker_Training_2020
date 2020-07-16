@@ -86,4 +86,22 @@ view: fact_orders {
     sql: ${TABLE}."SALE_PRICE" ;;
 
   }
+  measure: Cancellations {
+    label: "Cancellations"
+    type: count
+    #sql:  ${TABLE}."ID";;
+    filters: {
+      field: status
+      value: "Cancelled"
+      }
+  }
+  measure: Returns {
+      label: "Returns"
+      type: count
+    #  sql:  ${TABLE}."ID";;
+      filters: {
+        field: status
+        value: "Returned"
+      }
+  }
   }
