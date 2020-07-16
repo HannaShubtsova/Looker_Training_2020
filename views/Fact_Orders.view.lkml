@@ -86,6 +86,15 @@ view: fact_orders {
     sql: ${TABLE}."SALE_PRICE" ;;
 
   }
+  measure: Completed {
+    label: "Completed"
+    type: count
+    #sql:  ${TABLE}."ID";;
+    filters: {
+      field: status
+      value: "Complete"
+    }
+  }
   measure: Cancellations {
     label: "Cancellations"
     type: count
