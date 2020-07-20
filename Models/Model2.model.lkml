@@ -51,10 +51,6 @@ explore:  order_items_turnover {
  }
 }
 
-
-
-
-
 explore: fact_orders {
   label: "Delivered VS Retured"
   view_label: "Delivered VS Retured"
@@ -67,4 +63,38 @@ join: products {
 
 }
 
+}
+
+test: order_id_is_unique {
+  explore_source: fact_orders {
+    column: id {}
+    column: count {}
+    sorts: [count: desc]
+    limit: 1
+  }
+  assert: order_id_is_unique {
+    expression: ${fact_orders.count} = 1 ;;
+  }
+}
+
+test: status_is_not_null {
+  explore_source: orders {
+    column: status {}
+    sorts: [status: desc]
+    limit: 1
+  }
+  assert: status_is_not_null {
+    expression: NOT is_null(${orders.status}) ;;
+  }
+}
+
+test: sales_greater_then_zero{
+  explore_source: fact_orders {
+    column: sales {}
+    sorts: [Sales: desc]
+    limit: 1
+  }
+  assert: status_is_not_null {
+    expression: ${fact_orders} ;;
+  }
 }
