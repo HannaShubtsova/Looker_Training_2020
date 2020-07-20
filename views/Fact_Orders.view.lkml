@@ -81,6 +81,15 @@ view: fact_orders {
     sql: ${TABLE}."PRODUCT_ID" ;;
   }
 
+  parameter: max_rank {
+    type: number
+  }
+
+  dimension: rank_limit {
+    type: number
+    sql: {% parameter max_rank %} ;;
+  }
+
   measure: Sales {
     type: sum
     sql: ${TABLE}."SALE_PRICE" ;;
