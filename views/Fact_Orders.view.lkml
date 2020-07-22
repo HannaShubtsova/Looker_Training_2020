@@ -138,10 +138,10 @@ dimension:   is_ytd {
     label: "YTD all orders"
     type: sum
     sql:  Sum(COUNT(${TABLE}."ID")) over (partition by EXTRACT(YEAR FROM fact_orders."CREATED_AT" )::integer order by TO_CHAR(DATE_TRUNC('month', fact_orders."CREATED_AT" ), 'YYYY-MM') );;
-    filters: {
-      field: is_ytd
-      value: "yes"
-    }
+    #filters: {
+    #  field: is_ytd
+    #  value: "yes"
+    #}
     drill_fields: [products.brand, products.name]
 
   }
