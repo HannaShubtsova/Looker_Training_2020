@@ -1,5 +1,6 @@
 - dashboard: sales_performance_over_time
   title: Sales Performance Over Time
+
   layout: tile
   tile_size: 100
 
