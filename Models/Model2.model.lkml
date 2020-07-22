@@ -78,7 +78,7 @@ test: order_id_is_unique {
 }
 
 test: status_is_not_null {
-  explore_source: orders {
+  explore_source: fact_orders {
     column: status {}
     sorts: [status: desc]
     limit: 1
@@ -90,11 +90,10 @@ test: status_is_not_null {
 
 test: sales_greater_then_zero{
   explore_source: fact_orders {
-    column: sales {}
-    sorts: [Sales: desc]
+    column: Sales {}
     limit: 1
   }
-  assert: status_is_not_null {
-    expression: ${fact_orders} ;;
+  assert: sales_greater_then_zero {
+    expression: ${fact_orders.sales}>0 ;;
   }
 }

@@ -90,19 +90,76 @@ view: fact_orders {
     sql: {% parameter max_rank %} ;;
   }
 
+dimension:   is_ytd {
+ type: yesno
+ group_label: "Date Restrictions"
+ label: "Is YTD?"
+ view_label: "Dynamic Grouping & Time Comparisons"
+ sql:
+    MONTH(${TABLE}."CREATED_AT") < MONTH(CURRENT_TIMESTAMP)
+    OR
+    (MONTH(${TABLE}."CREATED_AT"}) = MONTH(CURRENT_TIMESTAMP)
+    AND
+    DAY(${TABLE}."CREATED_AT") <= DAY(CURRENT_TIMESTAMP))
+    ;;
+}
+
+  dimension:   is_mtd {
+    type: yesno
+    group_label: "Date Restrictions"
+    label: "Is YTD?"
+    view_label: "Dynamic Grouping & Time Comparisons"
+    sql:
+    MONTH(${TABLE}."CREATED_AT") = MONTH(CURRENT_TIMESTAMP)
+    OR
+    (MONTH(${TABLE}."CREATED_AT"}) = MONTH(CURRENT_TIMESTAMP)
+    AND
+    DAY(${TABLE}."CREATED_AT") <= DAY(CURRENT_TIMESTAMP))
+    ;;
+  }
+
+
   measure: Sales {
     type: sum
     sql: ${TABLE}."SALE_PRICE" ;;
 
   }
   measure: count {
+    group_label: "Base KPIs"
     label: "All orders"
     type: count
     #sql:  ${TABLE}."ID";;
     drill_fields: [products.brand, products.name]
   }
 
+
+  measure: count_YTD{
+    group_label: "Running KPIs"
+    label: "YTD all orders"
+    type: count
+    #sql:  ${TABLE}."ID";;
+    filters: {
+      field: is_ytd
+      value: "yes"
+    }
+    drill_fields: [products.brand, products.name]
+
+  }
+  measure: count_MTD{
+    group_label: "Running KPIs"
+    label: "MTD All orders"
+    type: count
+    #sql:  ${TABLE}."ID";;
+    filters: {
+      field: is_mtd
+      value: "yes"
+    }
+    drill_fields: [products.brand, products.name]
+
+  }
+
   measure: Completed {
+    group_label: "Base KPIs"
     label: "Completed"
     type: count
     #sql:  ${TABLE}."ID";;
@@ -112,7 +169,42 @@ view: fact_orders {
     }
     drill_fields: [products.brand, products.name]
   }
+
+  measure: Comleted_YTD{
+    group_label: "Running KPIs"
+    label: "YTD Completed"
+    type: count
+    #sql:  ${TABLE}."ID";;
+    filters: {
+      field: status
+      value: "Complete"
+      }
+      filters: {
+      field: is_ytd
+      value: "yes"
+    }
+    drill_fields: [products.brand, products.name]
+
+  }
+  measure: Comleted_MTD{
+    group_label: "Running KPIs"
+    label: "MTD Completed"
+    type: count
+    #sql:  ${TABLE}."ID";;
+    filters: {
+      field: status
+      value: "Complete"
+    }
+    filters: {
+      field: is_mtd
+      value: "yes"
+    }
+    drill_fields: [products.brand, products.name]
+
+  }
+
   measure: Cancellations {
+    group_label: "Base KPIs"
     label: "Cancellations"
     type: count
     #sql:  ${TABLE}."ID";;
@@ -123,7 +215,8 @@ view: fact_orders {
     drill_fields: [products.brand, products.name]
   }
   measure: Returns {
-      label: "Returns"
+    group_label: "Base KPIs"
+    label: "Returns"
       type: count
     #  sql:  ${TABLE}."ID";;
       filters: {
@@ -131,5 +224,38 @@ view: fact_orders {
         value: "Returned"
       }
      drill_fields: [products.brand, products.name]
+  }
+
+  measure: Returns_YTD{
+    group_label: "Running KPIs"
+    label: "YTD Returns"
+    type: count
+    #sql:  ${TABLE}."ID";;
+    filters: {
+      field: status
+      value: "Returned"
+    }
+    filters: {
+      field: is_ytd
+      value: "yes"
+    }
+    drill_fields: [products.brand, products.name]
+
+  }
+  measure: Returns_MTD{
+    group_label: "Running KPIs"
+    label: "MTD Returns"
+    type: count
+    #sql:  ${TABLE}."ID";;
+    filters: {
+      field: status
+      value: "Returned"
+    }
+    filters: {
+      field: is_mtd
+      value: "yes"
+    }
+    drill_fields: [products.brand, products.name]
+
   }
   }
