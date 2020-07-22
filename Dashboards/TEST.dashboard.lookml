@@ -1,6 +1,5 @@
-- dashboard: sales_performance_over_time
-  title: Sales Performance Over Time
-
+- dashboard: test
+  title: Test
   layout: tile
   tile_size: 100
 
@@ -9,3 +8,4 @@
   elements:
     - name: hello_world
       type: looker_column
+      explore: inventory_items
