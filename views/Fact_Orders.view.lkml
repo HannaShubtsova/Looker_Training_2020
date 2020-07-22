@@ -136,8 +136,8 @@ dimension:   is_ytd {
   measure: count_YTD{
     group_label: "Running KPIs"
     label: "YTD all orders"
-    type: sum
-    sql:  Sum(COUNT(${TABLE}."ID")) over (partition by EXTRACT(YEAR FROM fact_orders."CREATED_AT" )::integer order by TO_CHAR(DATE_TRUNC('month', fact_orders."CREATED_AT" ), 'YYYY-MM') );;
+    type: running_total
+    #sql:  Sum(COUNT(${TABLE}."ID")) over (partition by EXTRACT(YEAR FROM fact_orders."CREATED_AT" )::integer order by TO_CHAR(DATE_TRUNC('month', fact_orders."CREATED_AT" ), 'YYYY-MM') );;
     #filters: {
     #  field: is_ytd
     #  value: "yes"
