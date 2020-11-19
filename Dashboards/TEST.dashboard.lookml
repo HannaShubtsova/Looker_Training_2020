@@ -19,14 +19,3 @@
     default_value: Looker filter expression
     allow_multiple_values: true
     required: true
-
-
-  elements:
-     - name: last_period_sales
-       type: single_value
-       #note: 'text note placeholder'
-       model: Model2
-       explore: fact_orders
-       field: products.category
-       listen:
-        category: products.category

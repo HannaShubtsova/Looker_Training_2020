@@ -29,7 +29,7 @@ view: fact_orders {
   }
 
 
-  dimension_group: created {
+  dimension_group: created_2 {
     type: time
     timeframes: [date,week, month,quarter,year]
     sql: ${TABLE}."CREATED_AT" ;;
