@@ -39,6 +39,8 @@ view: users {
     sql: ${TABLE}."CREATED_AT" ;;
   }
 
+
+
   dimension: email {
     type: string
     sql: ${TABLE}."EMAIL" ;;
