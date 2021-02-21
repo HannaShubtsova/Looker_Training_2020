@@ -83,9 +83,27 @@ view: users {
     type: zipcode
     sql: ${TABLE}."ZIP" ;;
   }
+  dimension: city_state {
+    type: string
+    sql:  ${city}" || ‘, ‘ ||  ${state};;
+  }
+
+  dimension: is_email_source {
+    type: yesno
+    sql: ${traffic_source} = ‘Email’ ;;
+  }
+
+ dimension: age_tier {
+    type: tier
+    tiers: [18, 25, 35, 45, 55, 65, 75, 90]
+    sql: ${age} ;;
+    style: integer
+  }
 
   measure: count {
     type: count
     drill_fields: [id, first_name, last_name, events.count, order_items.count]
   }
+
+
 }

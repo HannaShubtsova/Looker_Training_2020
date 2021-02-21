@@ -92,13 +92,42 @@ view: order_items {
     sql: ${TABLE}."USER_ID" ;;
   }
 
+  dimension: shipping_days {
+    type:  number
+    sql: DATEDIFF(day, ${shipped_date}
+      ,${delivered_date});;
+  }
+
+  dimension_group: shipping_days {
+    type: duration
+    sql_start: ${shipped_date};;
+    sql_end: ${delivered_date};;
+    intervals: [day]
+  }
 
   measure: count {
     type: count
     drill_fields: [detail*]
   }
+  measure: order_count {
+    description: "A count of unique orders"
+    type: count_distinct
+    sql: ${order_id} ;;
+  }
 
-  # ----- Sets of fields for drilling ------
+  measure: total_sales {
+    type: sum
+    sql: ${sale_price} ;;
+  }
+
+  measure: average_sales {
+    type: average
+    sql: ${sale_price} ;;
+  }
+
+
+
+# ----- Sets of fields for drilling ------
   set: detail {
     fields: [
       id,
